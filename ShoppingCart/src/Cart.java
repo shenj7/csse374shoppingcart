@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.NoSuchElementException;
 
 public class Cart {
 	private double total;
@@ -22,19 +21,12 @@ public class Cart {
 				cart.put(item, amount);
 			}
 		}
+		updateCart();
 	}
-	
-//	public void removeItem(Item item, int amount) throws NoSuchElementException {
-//		if (!cart.keySet().contains(item)) {
-//			throw new NoSuchElementException();
-//		}
-//		if (cart.get(item)-amount <=0) {
-//			
-//		}
-//	}
 	
 	public void addDiscount(Discount discount) {
 		discounts.add(discount);
+		updateCart();
 	}
 	
 	public void updateCart() {
