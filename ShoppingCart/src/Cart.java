@@ -8,12 +8,27 @@ public class Cart {
 	private ArrayList<Discount> discounts;
 	
 	public Cart(Location location) {
+		this.cart = new HashMap<Item, Integer>();
+		this.discounts = new ArrayList<Discount>();
 		this.location = location;
+	}
+	
+	public void addItem(Item item, int amount) {
+		if (cart.containsKey(item)) {
+			cart.put(item, cart.get(item) + amount);
+		} else {
+			if (amount == 0) {
+				cart.remove(item);
+			} else {				
+				cart.put(item, amount);
+			}
+		}
+		updateCart();
 	}
 	
 	public void modifyCart(Item item, int amount) {
 		if (cart.containsKey(item)) {
-			cart.put(item, cart.get(item) + amount);
+			cart.put(item, amount);
 		} else {
 			if (amount == 0) {
 				cart.remove(item);
@@ -32,13 +47,17 @@ public class Cart {
 	public void updateCart() {
 		this.total = 0;
 		for (Item item: cart.keySet()) {
-			total = item.addPrice(total)*cart.get(item);
+			total = item.addPrice(getTotal())*cart.get(item);
 			//sum items
 		}
 		for (Discount discount: discounts) {
-			total = discount.calculateTotal(total);
+			total = discount.calculateTotal(getTotal());
 			//calculate discounts
 		}
-		total = location.calculateTax(this.total);
+		this.total = location.calculateTax(this.getTotal());
+	}
+
+	public double getTotal() {
+		return total;
 	}
 }
