@@ -1,8 +1,10 @@
+import java.util.Date;
 
 public class PercentageDiscount extends Discount {
 	private double percent;
 	
-	public PercentageDiscount(String code, int i) {
+	public PercentageDiscount(String code, int i, Date date) {
+		this.expiryDate = date;
 		this.code = code;
 		this.percent = i;
 	}

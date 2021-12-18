@@ -11,6 +11,7 @@ public class Cart {
 		this.cart = new HashMap<Item, Integer>();
 		this.discounts = new ArrayList<Discount>();
 		this.location = location;
+		this.total = 0;
 	}
 	
 	public void addItem(Item item, int amount) {
